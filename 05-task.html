@@ -23,7 +23,7 @@
 
         </p>
         <h2>Пользователь, у которого больше всего друзей</h2>
-        <p id="greatesFriendsCountOutput"></p>
+        <p id="greatestFriendsCountOutput"></p>
 
         </p>
 
@@ -39,13 +39,12 @@
         </p>
 
         <script>
-
             /*
             Задание:
             Перепишите код таким образом, чтобы он не поменял своего поведения, но результат работы сценария выводился не в консоль, а в соответствующие p.
             
             Электронные адреса пользователей (каждый адрес с новой строки) - параграф с id emailAddressesOutput
-            Пользователи с наибольшим количеством друзей (каждый пользователь с новой строки) - параграф с id greatesFriendsCountOutput
+            Пользователи с наибольшим количеством друзей (каждый пользователь с новой строки) - параграф с id greatestFriendsCountOutput
             Компании пользователей с наибольшим балансом - параграф с id greatestBalanceCompanyOutput
             Компании пользователей с наименьшим балансом - параграф с id lowestBalanceCompanyOutput
             */
@@ -488,12 +487,10 @@
             ];
 
             function showAllEmails() {
-                console.log("Электронные адреса пользователей:")
-                users.forEach(user => console.log(user.email));
+                users.forEach(user => emails.innerHTML += `${user.email} </br>`);
             }
 
             function showHigestFriendCount() {
-                console.log("Пользователи с наибольшим количеством друзей");
 
                 let max = Number.MIN_VALUE;
 
@@ -504,7 +501,7 @@
 
                 users
                     .filter(user => user.friends.length == max)
-                    .forEach(user => console.log(user.name.first + " " + user.name.last));
+                    .forEach(user => greatestFriends.innerHTML += `${user.name.first} ${user.name.last} </br>`);
             }
 
             function showMinMaxBalance() {
@@ -520,19 +517,23 @@
                     }
                 });
 
-                console.log("Компании пользователей с наибольшим балансом:")
                 users
                     .filter(user => user.balance == maxBalance)
-                    .forEach(user => console.log(user.company));
+                    .forEach(user => greatestBalance.innerHTML += user.company);
 
-                console.log("Компании пользователей с наименьшим балансом:")
                 users
                     .filter(user => user.balance == minBalance)
-                    .forEach(user => console.log(user.company));
+                    .forEach(user => lowestBalance.innerHTML += user.company);
             }
 
+            let emails = document.querySelector("#emailAddressesOutput");
             showAllEmails();
+
+            let greatestFriends = document.querySelector("#greatestFriendsCountOutput");
             showHigestFriendCount();
+
+            let greatestBalance = document.querySelector("#greatestBalanceCompanyOutput");
+            let lowestBalance = document.querySelector("#lowestBalanceCompanyOutput");
             showMinMaxBalance();
         </script>
     </body>
