@@ -64,6 +64,29 @@
         Если во второй ячейке значение больше 100, строка должна отображаться зеленым цветом, если значение менее 100 - красным цветом.
         Для смены цвета строки используйте код row.style.backgroundColor = "цвет"
         */
+
+        let table = document.querySelector("#statsTable");
+
+        let rowLength = table.rows[0].cells.length;
+
+        let sum = 0;
+        for (let i = 0; i < table.rows.length - 1; i++) {
+            let cell = table.rows[i].cells[rowLength - 1]
+            sum += Number(cell.textContent);
+        }
+
+        let output = document.querySelector("#output");
+        output.innerHTML = `<b>${sum}</b>`;
+
+        for (const row of table.rows) {
+            let cell = row.cells[rowLength - 1];
+            if (cell.textContent > 100) {
+                row.style.backgroundColor = "green";
+            }
+            else row.style.backgroundColor = "red";
+        }
+
+
     </script>
 </body>
 
