@@ -63,6 +63,11 @@
             <td>125</td>
             <td>100</td>
         </tr>
+        <tr>
+            <td><b>Итого</b></td>
+            <td class="firstOutput"></td>
+            <td class="secondOutput"></td>
+        </tr>
     </table>
 
     <div id="result"></div>
@@ -75,6 +80,36 @@
         В div с id result выведите сообщение "Отдел 1 сделал больше продаж" или "Отдел 2 сделал больше продаж" на основе раннее вычисленных значений в строке "Итого".
         Используйте любые методы, которые были рассмотрены на в прошлых уроках.
         */
+
+        let table = document.querySelector("#statsTable");
+        let firstOutput = document.querySelector(".firstOutput");
+        let secondOutput = document.querySelector(".secondOutput");
+
+        let rowLength = table.rows[0].cells.length; // количество колонок в таблице
+
+        let firstSum = 0;
+        for (let i = 1; i < table.rows.length - 1; i++) {
+            let cell = table.rows[i].cells[rowLength - 2];
+            firstSum += Number(cell.textContent);
+        }
+        firstOutput.innerHTML = `<b>${firstSum}</b>`;
+
+        let secondSum = 0;
+        for (let i = 1; i < table.rows.length - 1; i++) {
+            let cell = table.rows[i].cells[rowLength - 1];
+            secondSum += Number(cell.textContent);
+        }
+        secondOutput.innerHTML = `<b>${secondSum}</b>`;
+
+        let result = document.querySelector("#result");
+
+        if (firstSum > secondSum) {
+            result.textContent = "Отдел 1 сделал больше продаж";
+        }
+        else if (firstSum < secondSum) {
+            result.textContent = "Отдел 2 сделал больше продаж";
+        }
+        else result.textContent = "Оба отдела сделали одинаковое количество продаж";
     </script>
 </body>
 </html>
